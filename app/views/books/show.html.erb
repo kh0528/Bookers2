@@ -1,0 +1,30 @@
+<main>
+  <p id="notice"></p>
+  <%= notice %>
+  <div class="container">
+    <div class="row">
+      <%= render 'users/userinfo', user: @user, book: @book %>
+      <div class="col-md-8 offset-md-1">
+        <h2>Book detail</h2>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+               <%= link_to user_path(@user.id) do %>
+                <%= image_tag @user.get_profile_image(100,100) %>
+               <% end %><br>
+               <%= link_to @user.name,user_path(@user.id) %>
+              </td>
+              <td><%= link_to @books.title,book_path(@books.id) %></td>
+              <td><%= @books.body %></td>
+              <% if @books.user == current_user %>
+               <td><%= link_to "Edit",edit_book_path(@books), class: "btn btn-sm btn-success" %></td>
+               <td><%= link_to "Destroy",book_path(@books),method: :delete, class: "btn btn-sm btn-danger"  %></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
